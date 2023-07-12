@@ -1,0 +1,29 @@
+a=[[0,80,99,0,0],[80,0,0,97,0],[99,0,0,0,211],[0,97,0,0,101],[0,0,211,101,0]]
+inis=int(input("enter initial state"))
+gs=int(input("enter goal state"))
+def uc():
+    v=[]
+    q=[]
+    c=[]
+    ans=[]
+    q.append(inis)
+    c.append(0)
+    while(len(q)!=0):
+        j=q.pop(0)
+        k=c.pop(0)
+        if j not in v:
+            v.append(j)
+            for i in range(len(a)):
+                if(a[j][i]!=0):
+                    if(i==gs):
+                        ans.append(a[j][i]+k)
+                        continue
+                    if i not in v:
+                        q.append(i)
+                        c.append(a[j][i]+k)
+                       # print(q)
+                        #print(c)
+    m=min(ans)
+    print(ans)
+    return m
+print(uc())
