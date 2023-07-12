@@ -1,0 +1,25 @@
+def bfs(graph,node):
+    visited=[]
+    queue=[]
+    visited.append(node)
+    queue.append(node)
+    while(queue):
+        m=queue.pop(0)
+        print(m,end=" ")
+        for i in graph[m]:
+            if i not in visited:
+                visited.append(i)
+                queue.append(i)
+#graph={0:[1,2],1:[3],2:[3,4],3:[4],4:[0]}
+graph={'5':['3','7'],'3':['2','4'],'7':[],'4':['8'],'2':[],'8':[]}
+print(bfs(graph,'5'))
+def dfs(graph,node):
+    visited=set()
+    if node not in visited:
+        print(node,end=" ")
+        visited.add(node)
+        for i in graph[node]:
+            dfs(graph,i)
+graph={'5':['3','7'],'3':['2','4'],'7':[],'4':['8'],'2':[],'8':[]}
+#graph={0:[1,2],1:[3],2:[3,4],3:[4],4:[0]}
+print(dfs(graph,'5'))
