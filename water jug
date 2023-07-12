@@ -1,0 +1,94 @@
+jug1=int(input("Enter capacity of jug1:"))
+jug2=int(input("Enter capacity of jug2:"))
+target=int(input("Enter target capacity:"))
+def rules(x,y,choice):
+  if(choice==1):
+    if(x<jug1):
+      return jug1,y
+    else:
+      return x,y
+  if(choice==2):
+    if(y<jug2):
+      return x,jug2
+    else:
+      return x,y
+  if(choice==3):
+    if(x>0):
+      return 0,y
+    else:
+      return x,y
+  if(choice==4):
+    if(y>0):
+      return x,0
+    else:
+      return x,y
+  if(choice==5):
+    if((x+y)>=3 and x>0):
+      return (x-(3-y)),3
+    else:
+      return x,y
+  if(choice==6):
+    if((x+y)>=5 and y>0):
+      return 5,(y-(5-x))
+    else:
+      return x,y
+  if(choice==7):
+    if(x>0 and (x+y)<=3):
+      return 0,x+y
+    else:
+      return x,y
+  if(choice==8):
+    if(y>0 and (x+y)<=5):
+      return x+y,0
+    else:
+      return x,y
+  else:
+    print("Invalid choice")
+def bfs(choice_list,start,goal):
+  queue=[]
+  visited=[]
+  if(start[0]==goal or start[1]==goal):
+    visited.append(start)
+    return visited
+  queue.append(start)
+  while(queue):
+    t=queue.pop(0)
+    visited.append(t)
+    if(t[0]==goal or t[1]==goal):
+      return visited
+    for i in choice_list:
+      r=list(rules(t[0],t[1],i))
+      if(r[0]==goal or r[1]==goal):
+        visited.append(r)
+        return visited
+      elif(r not in visited):
+        queue.append(r)
+choice_list=[1,2,3,4,5,6,7,8]
+start=[0,0]
+v=bfs(choice_list,start,target)
+for i in v:
+  print(i,end=" ")
+def dfs(choice_list,start,goal):
+  queue=[]
+  visited=[]
+  if(start[0]==goal or start[1]==goal):
+    visited.append(start)
+    return visited
+  queue.append(start)
+  while(queue):
+    t=queue.pop()
+    visited.append(t)
+    if(t[0]==goal or t[1]==goal):
+      return visited
+    for i in choice_list:
+      r=list(rules(t[0],t[1],i))
+      if(r[0]==goal or r[1]==goal):
+        visited.append(r)
+        return visited
+      elif(r not in visited):
+        queue.append(r)
+choice_list=[1,2,3,4,5,6,7,8]
+start=[0,0]
+v2=dfs(choice_list,start,target)
+for i in v:
+  print(i,end=" ")
